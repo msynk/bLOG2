@@ -1,0 +1,30 @@
+﻿<div class="container">
+  <form id="confirmDeleteForm" action="/Manage/Delete/@Id" method="POST">
+    <div class="manage-index">
+      <div>@Id</div>
+      <div>@Title</div>
+      آیا برای حذف این پست مطمئن هستید؟
+      <table>
+        <tr>
+          <td>شناسه:</td>
+          <td><input id="username" name="username" type="text" /></td>
+        </tr>
+        <tr>
+          <td>رمز:</td>
+          <td><input id="password" name="password" type="password" /></td>
+        </tr>
+        <tr>
+          <td><input id="submit" type="submit" value="بله" /></td>
+          <td><input id="cancel" type="button" value="خیر" onclick="cancelConfirmDeletePost()" /></td>
+        </tr>
+      </table>
+    </div>
+  </form>
+</div>
+<script language="javascript">
+  function cancelConfirmDeletePost() {
+    var form = document.forms[0];
+    form.action = "/Manage/ShowAllPosts";
+    document.getElementById('submit').click();
+  }
+</script>

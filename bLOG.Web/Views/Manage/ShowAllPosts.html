@@ -1,0 +1,19 @@
+﻿<style>
+   table tr td {
+     padding: 5px;
+   }
+</style>
+<div class="container">
+  <form action="/Manage/ShowAllPosts" method="POST">
+    <div class="manage-allposts">
+      <table>
+        <tr class="manage-allposts-header">
+          <td>شناسه</td>
+          <td>عنوان پست</td>
+          <td>مدیریت</td>
+        </tr>
+        @PostRows
+      </table>
+    </div>
+  </form>
+</div>

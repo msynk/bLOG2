@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<rsd version="1.0">
+  <service>
+    <enginename>bLOG</enginename>
+    <enginelink>http://github.com/msynk/bLOG/</enginelink>
+    <homepagelink>http://localhost:1234</homepagelink>
+    <apis>
+      <api name="MetaWeblog" preferred="true" apilink="http://localhost:1234/metaweblog" blogid="1" />
+    </apis>
+  </service>
+</rsd>

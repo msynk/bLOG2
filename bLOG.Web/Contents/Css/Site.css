@@ -1,0 +1,151 @@
+﻿@font-face {
+  font-family: "BYekan";
+  src: url("../fonts/BYekan.txt");
+}
+
+@font-face {
+  font-family: 'Iranian Sans';
+  src: url("../fonts/irsans.eot");
+  src: url("../fonts/irsans.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'b koodak';
+  src: url('../fonts/BKoodkBd.eot') format('eot');
+  src: url('../fonts/BKoodkBd.woff') format('woff');
+  src: url('../fonts/BKoodkBd.ttf') format('truetype');
+}
+
+body {
+  margin: 0;
+  direction: rtl;
+  background-color: white;
+}
+
+a {
+  text-decoration: none;
+  color: #643a92;
+}
+
+  a:hover {
+    /*text-decoration: underline;*/
+  }
+
+
+.container {
+  width: auto;
+  max-width: 800px;
+  margin: 0 auto;
+  clear: both;
+  padding: 0 25px;
+}
+
+.header {
+  color: white;
+  background-color: #643a92;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.body {
+  margin: 50px 0;
+}
+
+.footer {
+  color: white;
+  background-color: #643a92;
+  font-family: 'BYekan';
+  font-size: 12px;
+}
+
+.siteTitle {
+  font-family: 'BYekan';
+  font-size: 50px;
+  font-weight: bold;
+  color: white;
+  margin: 0 auto;
+  font-family: consolas;
+  width: 100px; 
+}
+
+.firstpage-title {
+  font-size: 80px;
+  font-weight: bold;
+}
+
+.summaries {
+  
+}
+
+div.blog-wrapper {
+  font-family: 'BYekan';
+  color: black;
+  padding: 50px 0 50px 0;
+  border-bottom: solid 1px #c8c8c8;
+}
+
+  div.blog-wrapper div.title {
+    font-size: 40px;
+    font-weight: bold;
+    margin: 5px;
+  }
+
+  div.blog-wrapper span.author {
+    color: #333333;
+    padding: 5px;
+    font-size: 12px;
+  }
+
+  div.blog-wrapper span.publish-date {
+    color: gray;
+    padding: 5px;
+    font-size: 12px;
+  }
+
+  div.blog-wrapper span.views-count {
+    color: gray;
+    padding: 5px;
+    font-size: 12px;
+  }
+
+  div.blog-wrapper div.content {
+    padding: 20px 5px 5px 5px;
+    font-size: 13px;
+    line-height: 25px;
+    /*font-family: 'b koodak';*/
+  }
+
+.paging {
+  font-family: 'BYekan';
+  padding: 50px 0 20px 0;
+}
+
+.paging-prev {
+  background-color: #643a92;
+  color: white;
+  padding: 5px;
+  text-decoration: none;
+}
+
+.paging-next {
+  float: left;
+  background-color: #643a92;
+  color: white;
+  padding: 5px;
+  text-decoration: none;
+}
+
+.manage-index {
+  font-family: 'BYekan';
+}
+
+.manage-allposts {
+  font-family: 'BYekan';
+  margin-top: 150px;
+}
+
+.manage-allposts-header {
+  background-color: aqua;
+}

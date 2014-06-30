@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6F5C3431-B9ED-49EE-AB58-CCA903FFE17E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>bLOG.Web.Framework</RootNamespace>
+    <AssemblyName>bLOG.Web.Framework</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CookComputing.XmlRpcServerV2">
+      <HintPath>..\lib\CookComputing.XmlRpcServerV2.dll</HintPath>
+    </Reference>
+    <Reference Include="CookComputing.XmlRpcV2, Version=3.0.0.0, Culture=neutral, PublicKeyToken=a7d6e17aa302004d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\CookComputing.XmlRpcV2.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Handlers\HomeHandler.cs" />
+    <Compile Include="Handlers\ManageHandler.cs" />
+    <Compile Include="Handlers\PostHandler.cs" />
+    <Compile Include="Handlers\UnknownRequestHandler.cs" />
+    <Compile Include="Infra\FileService.cs" />
+    <Compile Include="Infra\Routing\HttpHandlerRouteHandler.cs" />
+    <Compile Include="MetaWeblog\Entities\PostEntity.cs" />
+    <Compile Include="MetaWeblog\IMetaWeblog.cs" />
+    <Compile Include="MetaWeblog\MediaObject.cs" />
+    <Compile Include="MetaWeblog\MetaWeblogHandler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Infra\SecurityService.cs" />
+    <Compile Include="Startup\AppStarter.cs" />
+    <Compile Include="Startup\RoutingStartup.cs" />
+    <Compile Include="Handlers\BaseHandler.cs" />
+    <Compile Include="Infra\Routing\GenericHandlerRouteHandler.cs" />
+    <Compile Include="Infra\Routing\RouteCollectionExtentions.cs" />
+    <Compile Include="Infra\Views\BasicView.cs" />
+    <Compile Include="Infra\Views\IView.cs" />
+    <Compile Include="Infra\Views\LayoutView.cs" />
+    <Compile Include="Infra\Views\RedirectView.cs" />
+    <Compile Include="Infra\Views\ViewPathProvider.cs" />
+    <Compile Include="Infra\Views\ViewContainer.cs" />
+    <Compile Include="WebConfig.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\bLOG.Core\bLOG.Core.csproj">
+      <Project>{f3c28a3f-0d79-431c-b677-4c1113393bad}</Project>
+      <Name>bLOG.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\bLOG.Data\bLOG.Data.csproj">
+      <Project>{63d32b3c-411c-4334-9494-2f4869761560}</Project>
+      <Name>bLOG.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

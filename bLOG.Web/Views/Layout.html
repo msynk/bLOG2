@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    @PageTitle
+  </title>
+  <link href="/Contents/Css/Site.css" rel="stylesheet" />
+  <link href="/Contents/Css/Code.css" rel="stylesheet" />
+  <link rel="EditURI" type="application/rsd+xml" href="/rsd.xml" />
+  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="/wlwmanifest.xml" />
+</head>
+<body>
+  <div class="header">
+    <div class="container">
+      <a class="siteTitle" href="/">bLOG</a>
+      <div style="float: left; margin-top: 15px; font-family: 'BYekan';">
+        <input id="txtSearch" style="font: 12px 'BYekan';" onkeyup="search(event, this)" /><button style="font: 12px 'BYekan';" onclick="  search(event)">جستجو</button>
+      </div>
+    </div>
+  </div>
+  <div class="body">
+    @PageBody
+  </div>
+  <div class="footer">
+    <div class="container" style="height: 25px;padding-top: 5px;">
+      کلیه حقوق این وبلاگ متعلق به bLOG است.
+      <div style="float:left">@Version</div>
+    </div>
+  </div>
+  <script language="javascript">
+    function search(e, el) {
+      if (el && e.keyCode !== 13) return;
+      var q = document.getElementById('txtSearch').value;
+      if (q) {
+        window.location = '/?q=' + escape(q);
+      }
+    }
+  </script>
+</body>
+</html>
