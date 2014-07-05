@@ -10,44 +10,47 @@ namespace bLOG.Data.Services
 {
   public abstract class DataService<T> : BaseDataService where T : class
   {
-    protected static readonly DbSet<T> Set = Context.Set<T>();
+    protected DbSet<T> Set { get; private set; }
 
-    protected DataService() { }
+    protected DataService()
+    {
+      Set = Context.Set<T>();
+    }
 
-    public static IQueryable<T> Query { get { return Set.AsNoTracking(); } }
-    public static IQueryable<T> QueryForEdit { get { return Set.AsQueryable(); } }
+    public IQueryable<T> Query { get { return Set.AsNoTracking(); } }
+    public IQueryable<T> QueryForEdit { get { return Set.AsQueryable(); } }
 
 
-    public static IEnumerable<T> Get()
+    public IEnumerable<T> Get()
     {
       return Set.AsNoTracking().ToList();
     }
-    public static IEnumerable<T> Get(Func<T, bool> predicate)
+    public IEnumerable<T> Get(Func<T, bool> predicate)
     {
       return Set.AsNoTracking().Where(predicate).ToList();
     }
-    public static IEnumerable<T> GetForEdit()
+    public IEnumerable<T> GetForEdit()
     {
       return Set.ToList();
     }
-    public static IEnumerable<T> GetForEdit(Func<T, bool> predicate)
+    public IEnumerable<T> GetForEdit(Func<T, bool> predicate)
     {
       return Set.Where(predicate).ToList();
     }
 
-    public static int Add(T entity)
+    public int Add(T entity)
     {
       Set.Add(entity);
       return Context.SaveChanges();
     }
 
-    public static int Edit(T entity)
+    public int Edit(T entity)
     {
       Context.Entry(entity).State = EntityState.Modified;
       return Context.SaveChanges();
     }
 
-    public static int Delete(T entity)
+    public int Delete(T entity)
     {
       Context.Entry(entity).State = EntityState.Deleted;
       return Context.SaveChanges();

@@ -61,7 +61,7 @@ namespace bLOG.Core.Localization
              
       DateTimeFormat.SetAllDateTimePatterns(new[] {"yyyy/MM/dd"}, 'd');
       DateTimeFormat.SetAllDateTimePatterns(new[] {"dddd dd MMMM yyyy، ساعت HH:mm"}, 'D');
-      //DateTimeFormat.SetAllDateTimePatterns(new[] {"dddd dd MMMM yyyy"}, 'F');
+      
       DateTimeFormat.SetAllDateTimePatterns(new[] {"yyyy MMMM"}, 'y');
       DateTimeFormat.SetAllDateTimePatterns(new[] {"yyyy MMMM"}, 'Y');
       

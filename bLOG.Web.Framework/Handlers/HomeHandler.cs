@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using bLOG.Core.Domain;
 using bLOG.Data.Services;
+using bLOG.Web.Framework.MetaWeblog;
 using bLOG.Web.Framework.Views;
 
 namespace bLOG.Web.Framework.Handlers
@@ -13,6 +14,9 @@ namespace bLOG.Web.Framework.Handlers
 
     public IView Index()
     {
+      var h = new bLOG.Web.Framework.MetaWeblog.MetaWeblogHandler() as IMetaWeblog;
+      h.GetAllPosts("yusefnejad", "1234567");
+
       Title = "bLOG!";
       var view = View();
       IEnumerable<Post> posts;
@@ -56,12 +60,12 @@ namespace bLOG.Web.Framework.Handlers
     private static IEnumerable<Post> GetPosts(int pageNumber, int pageSize)
     {
       var skip = (pageNumber - 1) * pageSize;
-      var posts = PostService.Query.OrderByDescending(p => p.PublishDate).Skip(skip).Take(pageSize).ToList();
+      var posts = PostService.Instance.Query.OrderByDescending(p => p.PublishDate).Skip(skip).Take(pageSize).ToList();
       return posts;
     }
     private static int GetTotalPages(int pageSize)
     {
-      var totalPosts = PostService.Query.Count();
+      var totalPosts = PostService.Instance.Query.Count();
       var totalPages = totalPosts / pageSize;
       if (totalPages * pageSize != totalPosts)
       {
@@ -71,7 +75,7 @@ namespace bLOG.Web.Framework.Handlers
     }
     private static IEnumerable<Post> SearchPosts(string q)
     {
-      var posts = PostService.Query.Where(p => p.Title.Contains(q)).OrderByDescending(p => p.PublishDate).ToList();
+      var posts = PostService.Instance.Query.Where(p => p.Title.Contains(q)).OrderByDescending(p => p.PublishDate).ToList();
       return posts;
     }
 

@@ -1,4 +1,7 @@
-﻿namespace bLOG.Web.Framework.Startup
+﻿using System.Threading;
+using bLOG.Core.Localization;
+
+namespace bLOG.Web.Framework.Startup
 {
   public class AppStarter
   {

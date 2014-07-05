@@ -28,11 +28,11 @@ namespace bLOG.Web.Framework.Handlers
       IEnumerable<Post> posts;
       if (username == "admin")
       {
-        posts = PostService.Get();
+        posts = PostService.Instance.Get();
       }
       else
       {
-        posts = PostService.GetByAuthor(username);
+        posts = PostService.Instance.GetByAuthor(username);
       }
       var view = View();
       var rows = posts.Select(GetRowView).Aggregate("", (current, rowView) => current + rowView.Render());
@@ -51,7 +51,7 @@ namespace bLOG.Web.Framework.Handlers
 
     public IView ConfirmDelete()
     {
-      var post = PostService.Get(Id);
+      var post = PostService.Instance.Get(Id);
       if (post == null) return null;
       var view = View();
       view.UpdateToken("Id", post.Id);
@@ -68,7 +68,8 @@ namespace bLOG.Web.Framework.Handlers
         return null;
       }
 
-      PostService.Delete(PostService.Get(Id));
+      var postService = PostService.Instance;
+      postService.Delete(postService.Get(Id));
 
       return new RedirectView("/Manage");
     }

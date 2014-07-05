@@ -31,6 +31,29 @@ a {
     /*text-decoration: underline;*/
   }
 
+table {
+  border-collapse: collapse;
+  padding: 0px;
+  border: 1px solid #cccccc;
+  width: 100%;
+}
+
+tr th {
+  border: 1px solid #cccccc;
+  margin: 10px;
+  padding: 10px 8px;
+  background-color: #eeeeee;
+  text-align: center;
+}
+
+tr td {
+  border: 1px solid #cccccc;
+  margin: 10px;
+  padding: 10px 8px;
+  vertical-align: top;
+  line-height: 30px;
+}
+
 
 .container {
   width: auto;
@@ -67,7 +90,7 @@ a {
   color: white;
   margin: 0 auto;
   font-family: consolas;
-  width: 100px; 
+  width: 100px;
 }
 
 .firstpage-title {
@@ -76,7 +99,6 @@ a {
 }
 
 .summaries {
-  
 }
 
 div.blog-wrapper {

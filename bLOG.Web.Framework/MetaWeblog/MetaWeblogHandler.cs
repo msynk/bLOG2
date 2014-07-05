@@ -14,10 +14,10 @@ namespace bLOG.Web.Framework.MetaWeblog
     string IMetaWeblog.AddPost(string blogid, string username, string password, PostEntity post, bool publish)
     {
       ValidateUser(username, password);
-      
+
       post.Author = username;
       post.IsPublished = publish;
-      PostService.Add(post.ToPost());
+      PostService.Instance.Add(post.ToPost());
 
       return post.Id.ToString(CultureInfo.InvariantCulture);
     }
@@ -26,13 +26,14 @@ namespace bLOG.Web.Framework.MetaWeblog
     {
       ValidateUser(username, password);
 
-      var match = PostService.Get(postid);
+      var postService = PostService.Instance;
+      var match = postService.Get(postid);
       if (match == null) return false;
 
       match.Title = post.Title;
       match.Content = post.Content;
       match.IsPublished = publish;
-      PostService.Edit(match);
+      postService.Edit(match);
       return true;
     }
 
@@ -40,10 +41,11 @@ namespace bLOG.Web.Framework.MetaWeblog
     {
       ValidateUser(username, password);
 
-      var post = PostService.Get(postid);
+      var postService = PostService.Instance;
+      var post = postService.Get(postid);
       if (post == null) return false;
 
-      PostService.Delete(post);
+      postService.Delete(post);
       return true;
     }
 
@@ -51,7 +53,7 @@ namespace bLOG.Web.Framework.MetaWeblog
     {
       ValidateUser(username, password);
 
-      var post = PostService.Get(postid);
+      var post = PostService.Instance.Get(postid);
       if (post == null) throw new XmlRpcFaultException(0, "Post does not exist");
 
       return new
@@ -63,17 +65,41 @@ namespace bLOG.Web.Framework.MetaWeblog
       };
     }
 
+    object[] IMetaWeblog.GetAllPosts(string username, string password)
+    {
+      ValidateUser(username, password);
+
+      return PostService.Instance.Query
+        .Where(p => p.Author == username)
+        .ToArray()
+        .Select(post => new
+        {
+          postid = post.Id,
+          title = post.Title,
+          description = post.Content,
+          dateCreated = post.PublishDate
+        })
+        .Cast<object>()
+        .ToArray();
+    }
+
     object[] IMetaWeblog.GetRecentPosts(string blogid, string username, string password, int numberOfPosts)
     {
       ValidateUser(username, password);
 
-      return PostService.Take(numberOfPosts).Select(post => new
-      {
-        postid = post.Id,
-        title = post.Title,
-        description = post.Content,
-        dateCreated = post.PublishDate
-      }).Cast<object>().ToArray();
+      return PostService.Instance.Query
+        .Where(p => p.Author == username)
+        .Take(numberOfPosts)
+        .ToArray()
+        .Select(post => new
+        {
+          postid = post.Id,
+          title = post.Title,
+          description = post.Content,
+          dateCreated = post.PublishDate
+        })
+        .Cast<object>()
+        .ToArray();
     }
 
     object[] IMetaWeblog.GetCategories(string blogid, string username, string password)
@@ -116,21 +142,9 @@ namespace bLOG.Web.Framework.MetaWeblog
         }
       };
     }
-
-
-    object[] IMetaWeblog.GetAllPosts(string username, string password)
-    {
-      ValidateUser(username, password);
-
-      return PostService.Query.Select(post => new
-      {
-        postid = post.Id,
-        title = post.Title,
-        description = post.Content,
-        dateCreated = post.PublishDate
-      }).Cast<object>().ToArray();
-    }
-
+    
+    
+    
 
     private static void ValidateUser(string username, string password)
     {

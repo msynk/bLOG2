@@ -9,12 +9,13 @@ namespace bLOG.Web.Framework.Handlers
   {
     public IView Index()
     {
-      var post = PostService.Get(Id);
+      var postService = PostService.Instance;
+      var post = postService.Get(Id);
       if (post == null) return null;
 
       Title = post.Title;
       post.ViewsCount += 1;
-      PostService.Edit(post);
+      postService.Edit(post);
 
       var view = View();
       view.UpdateToken("Id", post.Id);
