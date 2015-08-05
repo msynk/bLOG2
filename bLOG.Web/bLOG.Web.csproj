@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -56,10 +57,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Contents\Css\Code.css" />
+    <Content Include="Contents\Css\normalize.css" />
+    <Content Include="Contents\Css\prism.css" />
     <Content Include="Contents\Css\Site.css" />
     <Content Include="favicon.ico" />
-    <Content Include="Contents\fonts\BYEKAN.TTF" />
-    <Content Include="Contents\fonts\BYekan.txt" />
     <Content Include="Global.asax" />
     <Content Include="rsd.xml" />
     <Content Include="Views\404.html" />
@@ -71,11 +72,10 @@
     <Content Include="Views\Post\Index.html" />
     <Content Include="wlwmanifest.xml" />
     <Content Include="App_Data\bLOG.db" />
-    <Content Include="Contents\fonts\BKoodkBd.eot" />
-    <Content Include="Contents\fonts\BKoodkBd.ttf" />
-    <Content Include="Contents\fonts\BKoodkBd.woff" />
-    <Content Include="Contents\fonts\irsans.eot" />
-    <Content Include="Contents\fonts\irsans.ttf" />
+    <Content Include="Contents\fonts\icons.woff" />
+    <Content Include="Contents\fonts\1.woff2" />
+    <Content Include="Contents\fonts\2.woff2" />
+    <Content Include="Contents\fonts\3.woff2" />
     <None Include="Properties\PublishProfiles\file.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

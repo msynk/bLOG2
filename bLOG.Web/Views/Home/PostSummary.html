@@ -1,9 +1,11 @@
-﻿<div class="blog-wrapper">
-  <div class="title">
-    <a href="/post/@Id/@Slug">@Title</a>
-  </div>
-  <span class="publish-date">@PublishDate</span>
-  <span class="author">نویسنده @Author</span>
-  <span class="views-count">بازدید: @ViewsCount</span>
-  <div class="content">@Content</div>
-</div>
+﻿<article class="post">
+  <header class="post-header">
+    <span class="post-meta">
+      <time datetime="2015-03-20">@PublishDate</time>
+      &nbsp;&nbsp; author: <span class="author">@Author</span>
+      &nbsp;&nbsp; views: <span class="views-count">@ViewsCount</span>
+    </span>
+    <h2 class="post-title"><a href="/post/@Id/@Slug">@Title</a></h2>
+  </header>
+  <section class="post-excerpt">@Content</section>
+</article>

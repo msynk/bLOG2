@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Web;
-using System.Web.Security;
-using System.Web.SessionState;
-using bLOG.Core.Localization;
+//using bLOG.Core.Localization;
 using bLOG.Web.Framework.Startup;
 
 namespace bLOG.Web
@@ -25,8 +19,8 @@ namespace bLOG.Web
 
     protected void Application_BeginRequest(object sender, EventArgs e)
     {
-      Thread.CurrentThread.CurrentCulture = new PersianCultureInfo();
-      Thread.CurrentThread.CurrentUICulture = new PersianCultureInfo();
+      //Thread.CurrentThread.CurrentCulture = new PersianCultureInfo();
+      //Thread.CurrentThread.CurrentUICulture = new PersianCultureInfo();
     }
 
     protected void Application_AuthenticateRequest(object sender, EventArgs e)

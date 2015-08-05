@@ -36,8 +36,8 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Localization\PersianCultureInfo.cs" />
     <Compile Include="Domain\Post.cs" />
+    <Compile Include="Localization\PersianCultureInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
