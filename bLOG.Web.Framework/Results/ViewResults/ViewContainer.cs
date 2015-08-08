@@ -2,16 +2,15 @@
 using System.IO;
 using System.Web;
 
-// ReSharper disable once CheckNamespace
-namespace bLOG.Web.Framework.Views
+namespace bLOG.Web.Framework.Results.ViewResults
 {
   public static class ViewContainer
   {
     private static readonly Dictionary<string, string> ContentCache = new Dictionary<string, string>();
-    private static readonly Dictionary<string, BasicView> EngineCache = new Dictionary<string, BasicView>();
+    private static readonly Dictionary<string, IViewResult> EngineCache = new Dictionary<string, IViewResult>();
 
-    public static readonly BasicView LayoutView = GetViewEngine(WebConfig.ViewPathProvider.LayoutViewPath);
-    public static readonly BasicView UnknownRequestView = GetViewEngine(WebConfig.ViewPathProvider.NotFoundViewPath);
+    public static readonly IViewResult LayoutView = GetViewEngine(WebConfig.ViewPathProvider.LayoutViewPath);
+    public static readonly IViewResult UnknownRequestView = GetViewEngine(WebConfig.ViewPathProvider.NotFoundViewPath);
 
     public static void Reset()
     {
@@ -34,7 +33,7 @@ namespace bLOG.Web.Framework.Views
       using (var reader = new StreamReader(HttpContext.Current.Server.MapPath(GetVirtualPath(virtualPath))))
       {
         ContentCache.Add(virtualPath, reader.ReadToEnd());
-        EngineCache.Add(virtualPath, new BasicView(virtualPath));
+        EngineCache.Add(virtualPath, new BasicViewResult(virtualPath));
       }
     }
 
@@ -50,7 +49,7 @@ namespace bLOG.Web.Framework.Views
       return ContentCache[virtualPath];
     }
 
-    public static BasicView GetViewEngine(string virtualPath)
+    public static IViewResult GetViewEngine(string virtualPath)
     {
       if (!EngineCache.ContainsKey(virtualPath)) Register(virtualPath);
       return EngineCache[virtualPath];

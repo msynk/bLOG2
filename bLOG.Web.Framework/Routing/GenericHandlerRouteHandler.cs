@@ -3,7 +3,6 @@ using System.Web;
 using System.Web.Compilation;
 using System.Web.Routing;
 
-// ReSharper disable once CheckNamespace
 namespace bLOG.Web.Framework.Routing
 {
   public class GenericHandlerRouteHandler : IRouteHandler

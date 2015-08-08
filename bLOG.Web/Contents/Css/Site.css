@@ -690,6 +690,11 @@ margin on the iframe, cause it breaks stuff. */
   font-family: 'Open Sans', sans-serif;
 }
 
+  .blog-title > a {
+    color: white;
+    text-decoration: none;
+  }
+
 .blog-description {
   margin: 0;
   font-size: 1.8rem;

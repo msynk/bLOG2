@@ -3,8 +3,8 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using bLOG.Data.Services;
-using bLOG.Web.Framework;
 using bLOG.Web.Framework.MetaWeblog.Entities;
+using bLOG.Web.Framework.Services;
 using CookComputing.XmlRpc;
 
 namespace bLOG.Web.Framework.MetaWeblog

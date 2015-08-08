@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using bLOG.Core.Domain;
 using bLOG.Data.Services;
-using bLOG.Web.Framework.MetaWeblog;
-using bLOG.Web.Framework.Views;
+using bLOG.Web.Framework.Results.ViewResults;
 
 namespace bLOG.Web.Framework.Handlers
 {
@@ -12,12 +11,9 @@ namespace bLOG.Web.Framework.Handlers
   {
     protected override string Title { get; set; }
 
-    public IView Index()
+    public IViewResult Index()
     {
-      var h = new bLOG.Web.Framework.MetaWeblog.MetaWeblogHandler() as IMetaWeblog;
-      h.GetAllPosts("yusefnejad", "1234567");
-
-      Title = "bLOG!";
+      Title = "bLOG2";
       var view = View();
       IEnumerable<Post> posts;
 
@@ -25,8 +21,9 @@ namespace bLOG.Web.Framework.Handlers
       if (!string.IsNullOrEmpty(q))
       {
         posts = SearchPosts(q);
-        view.UpdateToken("PrevVisibility", "hidden");
-        view.UpdateToken("NextVisibility", "hidden");
+
+        view.UpdateToken("OlderPostsDisplay", "none");
+        view.UpdateToken("NewerPostsDisplay", "none");
       }
       else
       {
@@ -79,19 +76,24 @@ namespace bLOG.Web.Framework.Handlers
       return posts;
     }
 
-    private static void RenderPaging(IView view, int pageNumber, int totalPages)
+    private static void RenderPaging(IViewResult view, int pageNumber, int totalPages)
     {
+      view.UpdateToken("PageNumber", pageNumber);
+      view.UpdateToken("TotalPages", totalPages);
+
       var prevPageNumber = pageNumber + 1;
       view.UpdateToken("PrevPage", prevPageNumber);
-      view.UpdateToken("PrevVisibility", prevPageNumber > totalPages ? "hidden" : "visible");
+      view.UpdateToken("OlderPostsDisplay", prevPageNumber > totalPages ? "none" : "inline");
+      
 
       var nextPageNumber = pageNumber - 1;
       view.UpdateToken("NextPage", nextPageNumber);
-      view.UpdateToken("NextVisibility", nextPageNumber < 1 ? "hidden" : "visible");
+      view.UpdateToken("NewerPostsDisplay", nextPageNumber < 1 ? "none" : "inline");
     }
-    private void RenderPosts(IView view, IEnumerable<Post> posts)
+    private void RenderPosts(IViewResult view, IEnumerable<Post> posts)
     {
       var postSummaryView = View("PostSummary");
+      postSummaryView.UseLayout = false;
       var summaries = "";
       foreach (var post in posts)
       {

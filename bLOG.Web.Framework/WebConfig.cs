@@ -1,12 +1,12 @@
 ﻿using System.Collections.Specialized;
 using System.Configuration;
-using bLOG.Web.Framework.Views;
+using bLOG.Web.Framework.Results.ViewResults;
 
 namespace bLOG.Web.Framework
 {
   public static class WebConfig
   {
-    public static string Version = "0.6.0";
+    public static string Version = "0.7.0";
 
     public const string ViewsFolder = "Views";
     public const string ViewsExtention = "html";

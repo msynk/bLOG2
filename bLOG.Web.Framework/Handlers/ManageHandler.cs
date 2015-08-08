@@ -2,20 +2,20 @@
 using System.Linq;
 using bLOG.Core.Domain;
 using bLOG.Data.Services;
-using bLOG.Web.Framework;
-using bLOG.Web.Framework.Views;
+using bLOG.Web.Framework.Results.ViewResults;
+using bLOG.Web.Framework.Services;
 
 namespace bLOG.Web.Framework.Handlers
 {
   public class ManageHandler : BaseHandler
   {
-    public IView Index()
+    public IViewResult Index()
     {
       Title = "Manage!";
       return View();
     }
 
-    public IView ShowAllPosts()
+    public IViewResult ShowAllPosts()
     {
       var username = Param("username");
       var password = Param("password");
@@ -40,7 +40,7 @@ namespace bLOG.Web.Framework.Handlers
       return view;
     }
 
-    private IView GetRowView(Post post)
+    private IViewResult GetRowView(Post post)
     {
       var view = View("PostRow");
       view.UpdateToken("Id", post.Id);
@@ -49,7 +49,7 @@ namespace bLOG.Web.Framework.Handlers
       return view;
     }
 
-    public IView ConfirmDelete()
+    public IViewResult ConfirmDelete()
     {
       var post = PostService.Instance.Get(Id);
       if (post == null) return null;
@@ -59,7 +59,7 @@ namespace bLOG.Web.Framework.Handlers
       return view;
     }
 
-    public IView Delete()
+    public IViewResult Delete()
     {
       var username = Param("username");
       var password = Param("password");
@@ -71,7 +71,7 @@ namespace bLOG.Web.Framework.Handlers
       var postService = PostService.Instance;
       postService.Delete(postService.Get(Id));
 
-      return new RedirectView("/Manage");
+      return new RedirectViewResult("/Manage");
     }
   }
 }

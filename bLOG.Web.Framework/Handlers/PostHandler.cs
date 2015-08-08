@@ -1,13 +1,11 @@
-﻿using System.Globalization;
-using bLOG.Core.Domain;
-using bLOG.Data.Services;
-using bLOG.Web.Framework.Views;
+﻿using bLOG.Data.Services;
+using bLOG.Web.Framework.Results.ViewResults;
 
 namespace bLOG.Web.Framework.Handlers
 {
   public class PostHandler : BaseHandler
   {
-    public IView Index()
+    public IViewResult Index()
     {
       var postService = PostService.Instance;
       var post = postService.Get(Id);

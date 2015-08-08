@@ -3,8 +3,7 @@ using System.IO;
 using System.Web;
 using System.Web.Hosting;
 
-// ReSharper disable once CheckNamespace
-namespace bLOG.Web.Framework
+namespace bLOG.Web.Framework.Services
 {
   public class FileService
   {

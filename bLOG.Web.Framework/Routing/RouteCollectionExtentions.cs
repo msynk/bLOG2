@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Web.Routing;
 
-// ReSharper disable once CheckNamespace
 namespace bLOG.Web.Framework.Routing
 {
   public static class RouteCollectionExtentions

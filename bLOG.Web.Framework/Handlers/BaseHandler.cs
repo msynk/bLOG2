@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using System.Reflection;
 using System.Web;
-using bLOG.Web.Framework.Views;
+using bLOG.Web.Framework.Results;
+using bLOG.Web.Framework.Results.ViewResults;
 
 namespace bLOG.Web.Framework.Handlers
 {
@@ -19,23 +19,18 @@ namespace bLOG.Web.Framework.Handlers
     {
       Context = context;
       var view = ProcessRequestInternal() ?? ViewContainer.UnknownRequestView;
-      if (view.UseLayout)
-      {
-        view = Layout(view);
-      }
-      view.Render(context);
+      view.ExecuteResult(context);
     }
 
     #endregion
 
-    protected virtual IView ProcessRequestInternal()
+    protected virtual IHttpResult ProcessRequestInternal()
     {
       var type = GetType();
       var method = type.GetMethods().SingleOrDefault(m => m.Name.ToUpper() == Action.ToUpper());
       if (method != null)
       {
-        //return method.Invoke(this, new object[] { Id }) as IView;
-        return method.Invoke(this, null) as IView;
+        return method.Invoke(this, null) as IHttpResult;
       }
       return null;
     }
@@ -47,14 +42,13 @@ namespace bLOG.Web.Framework.Handlers
     protected string Id { get { return Route(WebConfig.IdRoute).ToString(); } }
 
 
-    protected IView View()
+    protected IViewResult View()
     {
       return View(Action);
     }
-    protected IView View(string viewName)
+    protected IViewResult View(string viewName)
     {
       var view = ViewContainer.GetViewEngine(WebConfig.ViewPathProvider.GetPath(ViewsFolder, viewName));
-      view.ResetTokens();
       return view;
     }
 
@@ -69,16 +63,6 @@ namespace bLOG.Web.Framework.Handlers
     protected string Param(string name)
     {
       return Request.Params[name];
-    }
-
-    protected IView Layout(IView view)
-    {
-      var layout = ViewContainer.LayoutView;
-      layout.UpdateToken(WebConfig.PageTitleToken, Title ?? "");
-      layout.UpdateToken(WebConfig.PageBodyToken, view.Render());
-      layout.UpdateToken(WebConfig.VersionToken, WebConfig.Version);
-
-      return layout;
     }
   }
 }

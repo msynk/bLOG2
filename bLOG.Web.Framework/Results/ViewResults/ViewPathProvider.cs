@@ -1,8 +1,6 @@
 ﻿using System.IO;
-using bLOG.Web.Framework;
 
-// ReSharper disable once CheckNamespace
-namespace bLOG.Web.Framework.Views
+namespace bLOG.Web.Framework.Results.ViewResults
 {
   public class ViewPathProvider
   {

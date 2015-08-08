@@ -1,10 +1,10 @@
-﻿using bLOG.Web.Framework.Views;
+﻿using bLOG.Web.Framework.Results;
 
 namespace bLOG.Web.Framework.Handlers
 {
   public class UnknownRequestHandler : BaseHandler
   {
-    protected override IView ProcessRequestInternal()
+    protected override IHttpResult ProcessRequestInternal()
     {
       return null;
     }

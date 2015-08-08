@@ -1,7 +1,6 @@
 ﻿using System.Web.Security;
 
-// ReSharper disable once CheckNamespace
-namespace bLOG.Web.Framework
+namespace bLOG.Web.Framework.Services
 {
   public class SecurityService
   {

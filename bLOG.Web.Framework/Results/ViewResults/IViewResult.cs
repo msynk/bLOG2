@@ -1,12 +1,11 @@
 ﻿using System.Web;
 
-// ReSharper disable once CheckNamespace
-namespace bLOG.Web.Framework.Views
+namespace bLOG.Web.Framework.Results.ViewResults
 {
-  public interface IView
+  public interface IViewResult : IHttpResult
   {
     bool UseLayout { get; set; }
-    void Render(HttpContext context);
+
     string Render();
 
     void ResetTokens();
