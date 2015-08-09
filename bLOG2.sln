@@ -17,6 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_lib", "_lib", "{69694B0E-B
 		lib\EntityFramework.6.1.dll = lib\EntityFramework.6.1.dll
 		lib\EntityFramework.dll = lib\EntityFramework.dll
 		lib\EntityFramework.SqlServer.dll = lib\EntityFramework.SqlServer.dll
+		sqlite.txt = sqlite.txt
 		wlw.txt = wlw.txt
 		WLWDownloader.msi = WLWDownloader.msi
 	EndProjectSection
