@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -13,6 +14,10 @@ namespace bLOG.Web.Framework.MetaWeblog
   {
     string IMetaWeblog.AddPost(string blogid, string username, string password, PostEntity post, bool publish)
     {
+      //var request = System.Web.HttpContext.Current.Request;
+      //request.InputStream.Position = 0;
+      //var input = new StreamReader(request.InputStream).ReadToEnd();
+
       ValidateUser(username, password);
 
       post.Author = username;
@@ -32,6 +37,8 @@ namespace bLOG.Web.Framework.MetaWeblog
 
       match.Title = post.Title;
       match.Content = post.Content;
+      match.Keywords = post.Keywords;
+      match.PublishDate = post.PublishDate;
       match.IsPublished = publish;
       postService.Edit(match);
       return true;
@@ -61,7 +68,8 @@ namespace bLOG.Web.Framework.MetaWeblog
         postid = post.Id,
         title = post.Title,
         description = post.Content,
-        dateCreated = post.PublishDate
+        dateCreated = post.PublishDate,
+        mt_keywords = post.Keywords ?? ""
       };
     }
 
@@ -77,7 +85,8 @@ namespace bLOG.Web.Framework.MetaWeblog
           postid = post.Id,
           title = post.Title,
           description = post.Content,
-          dateCreated = post.PublishDate
+          dateCreated = post.PublishDate,
+          mt_keywords = post.Keywords ?? ""
         })
         .Cast<object>()
         .ToArray();
@@ -96,7 +105,8 @@ namespace bLOG.Web.Framework.MetaWeblog
           postid = post.Id,
           title = post.Title,
           description = post.Content,
-          dateCreated = post.PublishDate
+          dateCreated = post.PublishDate,
+          mt_keywords = post.Keywords ?? ""
         })
         .Cast<object>()
         .ToArray();
@@ -104,20 +114,17 @@ namespace bLOG.Web.Framework.MetaWeblog
 
     object[] IMetaWeblog.GetCategories(string blogid, string username, string password)
     {
-      throw new NotSupportedException();
+      ValidateUser(username, password);
 
+      var list = new List<object>();
+      var categories = PostService.Instance.Query.Select(p => p.Keywords).ToList().SelectMany(t => (t ?? "").Split(','));
 
-      //ValidateUser(username, password);
+      foreach (string category in categories.Distinct())
+      {
+        list.Add(new { title = category });
+      }
 
-      //var list = new List<object>();
-      //var categories = Storage.GetAllPosts().SelectMany(p => p.Categories);
-
-      //foreach (string category in categories.Distinct())
-      //{
-      //  list.Add(new { title = category });
-      //}
-
-      //return list.ToArray();
+      return list.ToArray();
     }
 
     object IMetaWeblog.NewMediaObject(string blogid, string username, string password, MediaObject media)
@@ -132,9 +139,9 @@ namespace bLOG.Web.Framework.MetaWeblog
     {
       ValidateUser(username, password);
 
-      return new[] 
-      { 
-        new 
+      return new[]
+      {
+        new
         {
           blogid = "1",
           blogName = "bLOG",
@@ -142,9 +149,9 @@ namespace bLOG.Web.Framework.MetaWeblog
         }
       };
     }
-    
-    
-    
+
+
+
 
     private static void ValidateUser(string username, string password)
     {

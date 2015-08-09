@@ -1,1 +1,19 @@
+http://devnet.kentico.com/articles/windows-live-writer-integration
+
+windows live writer downloader plugin:
+http://codeclimber.net.nz/archive/2010/07/10/How-to-edit-very-old-posts-with-Windows-Live-Writer.aspx
 wlw://localhost:1234/?postid=1
+
+http://itproguru.com/expert/2013/09/adding-tags-dropdown-list-to-windows-live-writerstep-by-step/
+HKEY_CURRENT_USER\Software\Microsoft\Windows Live\Writer\Weblogs\YourBlogID\UserOptionOverrides
+supportsKeywords -> Yes
+
+
+change this address in rsd.xml file:
+http://localhost:1234/metaweblog
+to the website url and metaweblog handler real address.
+
+
+for more info:
+https://github.com/madskristensen/miniblog
+http://xmlrpc.scripting.com/metaWeblogApi.html

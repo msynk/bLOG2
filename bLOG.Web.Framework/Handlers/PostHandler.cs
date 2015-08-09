@@ -23,6 +23,7 @@ namespace bLOG.Web.Framework.Handlers
       view.UpdateToken("Content", post.Content);
       view.UpdateToken("PublishDate", post.PublishDate.ToString("D"));
       view.UpdateToken("ViewsCount", post.ViewsCount.ToString());
+      view.UpdateToken("Keywords", post.Keywords ?? "");
 
       return view;
     }

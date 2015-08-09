@@ -43,6 +43,7 @@ namespace bLOG.Web.Framework.Handlers
     private IViewResult GetRowView(Post post)
     {
       var view = View("PostRow");
+      view.UseLayout = false;
       view.UpdateToken("Id", post.Id);
       view.UpdateToken("Title", post.Title);
       view.UpdateToken("SiteUrl", Request.Url.Authority);

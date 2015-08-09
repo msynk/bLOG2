@@ -54,7 +54,7 @@ namespace bLOG.Web.Framework.Handlers
       }
       return pageNumber;
     }
-    private static IEnumerable<Post> GetPosts(int pageNumber, int pageSize)
+    private static IList<Post> GetPosts(int pageNumber, int pageSize)
     {
       var skip = (pageNumber - 1) * pageSize;
       var posts = PostService.Instance.Query.OrderByDescending(p => p.PublishDate).Skip(skip).Take(pageSize).ToList();
@@ -70,7 +70,7 @@ namespace bLOG.Web.Framework.Handlers
       }
       return totalPages;
     }
-    private static IEnumerable<Post> SearchPosts(string q)
+    private static IList<Post> SearchPosts(string q)
     {
       var posts = PostService.Instance.Query.Where(p => p.Title.Contains(q)).OrderByDescending(p => p.PublishDate).ToList();
       return posts;
@@ -109,6 +109,7 @@ namespace bLOG.Web.Framework.Handlers
         postSummaryView.UpdateToken("Content", content.Substring(0, index) + "...");
         postSummaryView.UpdateToken("PublishDate", post.PublishDate.ToString("D"));
         postSummaryView.UpdateToken("ViewsCount", post.ViewsCount);
+        postSummaryView.UpdateToken("Keywords", post.Keywords ?? "");
         summaries += postSummaryView.Render();
       }
       view.UpdateToken("Summaries", summaries);
