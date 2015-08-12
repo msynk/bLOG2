@@ -28,19 +28,28 @@ namespace bLOG.Web.Framework.Handlers
     {
       var type = GetType();
       var method = type.GetMethods().SingleOrDefault(m => m.Name.ToUpper() == Action.ToUpper());
-      if (method != null)
+      if (method == null)
       {
-        return method.Invoke(this, null) as IHttpResult;
+        return null;
       }
-      return null;
+      return FinalizeView(method.Invoke(this, null) as IHttpResult);
     }
 
-    protected virtual string Title { get; set; }
+    protected virtual string PageTitle { get; set; }
     protected virtual string ViewsFolder { get { return Handler; } }
     protected string Handler { get { return Route(WebConfig.HanlderRoute).ToString(); } }
     protected string Action { get { return Route(WebConfig.ActionRoute).ToString(); } }
     protected string Id { get { return Route(WebConfig.IdRoute).ToString(); } }
 
+    protected virtual IHttpResult FinalizeView(IHttpResult result)
+    {
+      IViewResult viewResult = result as IViewResult;
+      if(viewResult != null)
+      {
+        viewResult.UpdateToken(WebConfig.PageTitleToken, PageTitle);
+      }
+      return result;
+    }
 
     protected IViewResult View()
     {
@@ -49,6 +58,7 @@ namespace bLOG.Web.Framework.Handlers
     protected IViewResult View(string viewName)
     {
       var view = ViewContainer.GetViewEngine(WebConfig.ViewPathProvider.GetPath(ViewsFolder, viewName));
+      view.UseLayout = true;
       return view;
     }
 

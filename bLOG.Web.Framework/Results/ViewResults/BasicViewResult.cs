@@ -7,18 +7,11 @@ namespace bLOG.Web.Framework.Results.ViewResults
   public class BasicViewResult : IViewResult
   {
     private readonly string _virtualPath;
-    private readonly string _title = "";
     private readonly Dictionary<string, object> _replacements = new Dictionary<string, object>();
 
     public BasicViewResult(string virtualPath)
     {
-      UseLayout = true;
       _virtualPath = virtualPath;
-    }
-
-    public BasicViewResult(string virtualPath, string title) : this(virtualPath)
-    {
-      _title = title;
     }
 
     public bool UseLayout { get; set; }
@@ -59,8 +52,8 @@ namespace bLOG.Web.Framework.Results.ViewResults
     private string RenderLayout(string result)
     {
       var layoutView = ViewContainer.LayoutView;
-      layoutView.UseLayout = false;
-      layoutView.UpdateToken(WebConfig.PageTitleToken, _title);
+      string pageTitle = _replacements.ContainsKey(WebConfig.PageTitleToken) ? _replacements[WebConfig.PageTitleToken].ToString() : "";
+      layoutView.UpdateToken(WebConfig.PageTitleToken, pageTitle);
       layoutView.UpdateToken(WebConfig.PageBodyToken, result);
       layoutView.UpdateToken(WebConfig.VersionToken, WebConfig.Version);
 

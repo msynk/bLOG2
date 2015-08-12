@@ -76,6 +76,7 @@
     <Content Include="Contents\fonts\1.woff2" />
     <Content Include="Contents\fonts\2.woff2" />
     <Content Include="Contents\fonts\3.woff2" />
+    <Content Include="Contents\fonts\icons.txt" />
     <None Include="Properties\PublishProfiles\file.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -6,7 +6,7 @@ namespace bLOG.Web.Framework
 {
   public static class WebConfig
   {
-    public static string Version = "0.8.1";
+    public static string Version = "0.9.0";
 
     public const string ViewsFolder = "Views";
     public const string ViewsExtention = "html";
@@ -27,5 +27,7 @@ namespace bLOG.Web.Framework
     public static ViewPathProvider ViewPathProvider = ViewPathProvider.Default;
 
     public static NameValueCollection AppSettings = ConfigurationManager.AppSettings;
+    public static string PageSize = AppSettings["PageSize"];
+    public static string BlogTitle = AppSettings["BlogTitle"];
   }
 }

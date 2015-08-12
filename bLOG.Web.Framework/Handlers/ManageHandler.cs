@@ -11,7 +11,7 @@ namespace bLOG.Web.Framework.Handlers
   {
     public IViewResult Index()
     {
-      Title = "Manage!";
+      PageTitle = "Manage!";
       return View();
     }
 

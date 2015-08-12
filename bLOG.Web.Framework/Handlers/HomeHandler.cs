@@ -9,40 +9,45 @@ namespace bLOG.Web.Framework.Handlers
 {
   public class HomeHandler : BaseHandler
   {
-    protected override string Title { get; set; }
+    protected override string PageTitle { get; set; }
 
     public IViewResult Index()
     {
-      Title = "bLOG2";
-      var view = View();
-      IEnumerable<Post> posts;
-
-      var q = QueryString("q");
-      if (!string.IsNullOrEmpty(q))
-      {
-        posts = SearchPosts(q);
-
-        view.UpdateToken("OlderPostsDisplay", "none");
-        view.UpdateToken("NewerPostsDisplay", "none");
-      }
-      else
-      {
-        var pageNumber = GetPageNumber();
-        var pageSize = int.Parse(WebConfig.AppSettings["Index.PageSize"]);
-        var totalPages = GetTotalPages(pageSize);
-        if (pageNumber > totalPages)
-        {
-          Response.Redirect("/");
-        }
-        view.UpdateToken("FirstPageTitleDisplay", pageNumber == 1 ? "block" : "none");
-        RenderPaging(view, pageNumber, totalPages);
-        posts = GetPosts(pageNumber, pageSize);
-      }
-
-      RenderPosts(view, posts);
-      return view;
+      PageTitle = string.Format("{0} - Home", WebConfig.BlogTitle);
+      IQueryable<Post> query = PostService.Instance.Query;
+      query = ExpandQuery(query);
+      return GenerateView(query);
     }
 
+    private IQueryable<Post> ExpandQuery(IQueryable<Post> query)
+    {
+      string s = QueryString("s");
+      string t = QueryString("t");
+      if (!string.IsNullOrEmpty(s))
+      {
+        query = query.Where(p => p.Title.Contains(s));
+      }
+      if (!string.IsNullOrEmpty(t))
+      {
+        query = query.Where(p => p.Keywords.Contains(t));
+      }
+      return query;
+    }
+    private IViewResult GenerateView(IQueryable<Post> query)
+    {
+      IViewResult view = View();
+      int pageNumber = GetPageNumber();
+      int pageSize = int.Parse(WebConfig.PageSize);
+      int totalPages = GetTotalPages(query, pageSize);
+      if (pageNumber > totalPages)
+      {
+        Response.Redirect("/");
+      }
+      SetPagingTokens(view, pageNumber, totalPages);
+      IList<Post> posts = GetPosts(query, pageNumber, pageSize);
+      view.UpdateToken("Summaries", RenderSummaries(posts));
+      return view;
+    }
 
     private int GetPageNumber()
     {
@@ -54,15 +59,9 @@ namespace bLOG.Web.Framework.Handlers
       }
       return pageNumber;
     }
-    private static IList<Post> GetPosts(int pageNumber, int pageSize)
+    private int GetTotalPages(IQueryable<Post> query, int pageSize)
     {
-      var skip = (pageNumber - 1) * pageSize;
-      var posts = PostService.Instance.Query.OrderByDescending(p => p.PublishDate).Skip(skip).Take(pageSize).ToList();
-      return posts;
-    }
-    private static int GetTotalPages(int pageSize)
-    {
-      var totalPosts = PostService.Instance.Query.Count();
+      var totalPosts = query.Count();
       var totalPages = totalPosts / pageSize;
       if (totalPages * pageSize != totalPosts)
       {
@@ -70,27 +69,41 @@ namespace bLOG.Web.Framework.Handlers
       }
       return totalPages;
     }
-    private static IList<Post> SearchPosts(string q)
+    private IList<Post> GetPosts(IQueryable<Post> query, int pageNumber, int pageSize)
     {
-      var posts = PostService.Instance.Query.Where(p => p.Title.Contains(q)).OrderByDescending(p => p.PublishDate).ToList();
+      var skip = (pageNumber - 1) * pageSize;
+      var posts = query.OrderByDescending(p => p.PublishDate).Skip(skip).Take(pageSize).ToList();
       return posts;
     }
-
-    private static void RenderPaging(IViewResult view, int pageNumber, int totalPages)
+    private void SetPagingTokens(IViewResult view, int pageNumber, int totalPages)
     {
       view.UpdateToken("PageNumber", pageNumber);
       view.UpdateToken("TotalPages", totalPages);
 
       var prevPageNumber = pageNumber + 1;
       view.UpdateToken("PrevPage", prevPageNumber);
-      view.UpdateToken("OlderPostsDisplay", prevPageNumber > totalPages ? "none" : "inline");
-      
+      view.UpdateToken("OlderPostsDisplay", prevPageNumber > totalPages ? "none" : "block");
+
 
       var nextPageNumber = pageNumber - 1;
       view.UpdateToken("NextPage", nextPageNumber);
-      view.UpdateToken("NewerPostsDisplay", nextPageNumber < 1 ? "none" : "inline");
+      view.UpdateToken("NewerPostsDisplay", nextPageNumber < 1 ? "none" : "block");
+
+      string queryString = "";
+      string s = QueryString("s");
+      string t = QueryString("t");
+
+      if (!string.IsNullOrEmpty(s))
+      {
+        queryString += "&s=" + s;
+      }
+      if (!string.IsNullOrEmpty(t))
+      {
+        queryString += "&t=" + t;
+      }
+      view.UpdateToken("QueryString", queryString);
     }
-    private void RenderPosts(IViewResult view, IEnumerable<Post> posts)
+    private string RenderSummaries(IEnumerable<Post> posts)
     {
       var postSummaryView = View("PostSummary");
       postSummaryView.UseLayout = false;
@@ -109,10 +122,17 @@ namespace bLOG.Web.Framework.Handlers
         postSummaryView.UpdateToken("Content", content.Substring(0, index) + "...");
         postSummaryView.UpdateToken("PublishDate", post.PublishDate.ToString("D"));
         postSummaryView.UpdateToken("ViewsCount", post.ViewsCount);
-        postSummaryView.UpdateToken("Keywords", post.Keywords ?? "");
+        postSummaryView.UpdateToken("Keywords", RenderKeywords(post.Keywords ?? ""));
         summaries += postSummaryView.Render();
       }
-      view.UpdateToken("Summaries", summaries);
+      return summaries;
+    }
+
+    private string RenderKeywords(string keywords)
+    {
+      if (string.IsNullOrEmpty(keywords)) return "";
+      string anchorFormat = "<a href=/?t={0}>{0}</a>";
+      return string.Join(",", keywords.Split(',').Select(k => string.Format(anchorFormat, k)));
     }
   }
 }

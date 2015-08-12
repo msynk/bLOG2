@@ -314,8 +314,11 @@
 /* Import the font file with the icons in it */
 @font-face {
   font-family: 'icons';
+  /*
   src: url('../fonts/icons.eot');
   src: url('../fonts/icons.eot?#iefix') format('embedded-opentype'), url('../fonts/icons.woff') format('woff'), url('../fonts/icons.ttf') format('truetype'), url('../fonts/icons.svg#icons') format('svg');
+  */
+  src: url('../fonts/icons.txt') format('woff');
   font-weight: normal;
   font-style: normal;
 }

@@ -11,7 +11,7 @@ namespace bLOG.Web.Framework.Handlers
       var post = postService.Get(Id);
       if (post == null) return null;
 
-      Title = post.Title;
+      PageTitle = string.Format("{0} - {1}", WebConfig.BlogTitle, post.Title);
       post.ViewsCount += 1;
       postService.Edit(post);
 
