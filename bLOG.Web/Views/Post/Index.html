@@ -1,14 +1,24 @@
-﻿<article class="post">
-  <header class="post-header">
+﻿<script type="text/javascript">
+    var disqus_shortname = 'createYourShortNameAt:https://disqus.com/admin/create/';
+    var disqus_title = '@Title';
+    (function () {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<article class="post">
+    <header class="post-header">
+        <span class="post-meta">
+            <time datetime="2015-03-20">@PublishDate</time>
+            &nbsp;&nbsp; author: <span class="author">@Author</span>
+            &nbsp;&nbsp; views: <span class="views-count">@ViewsCount</span>
+        </span>
+        <h2 class="post-title"><a href="/post/@Id/@Slug">@Title</a></h2>
+    </header>
+    <section class="post-excerpt">@Content</section>
     <span class="post-meta">
-      <time datetime="2015-03-20">@PublishDate</time>
-      &nbsp;&nbsp; author: <span class="author">@Author</span>
-      &nbsp;&nbsp; views: <span class="views-count">@ViewsCount</span>
+        <span class="tags">@Keywords</span>
     </span>
-    <h2 class="post-title"><a href="/post/@Id/@Slug">@Title</a></h2>
-  </header>
-  <section class="post-excerpt">@Content</section>
-  <span class="post-meta">
-    <span class="tags">@Keywords</span>
-  </span>
+    <div id="disqus_thread"></div>
 </article>
