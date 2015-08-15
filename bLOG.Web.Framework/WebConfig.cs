@@ -6,7 +6,7 @@ namespace bLOG.Web.Framework
 {
   public static class WebConfig
   {
-    public static string Version = "0.11.2";
+    public static string Version = "0.11.3";
 
     public const string ViewsFolder = "Views";
     public const string ViewsExtention = "html";

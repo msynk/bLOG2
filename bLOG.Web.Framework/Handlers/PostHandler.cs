@@ -1,4 +1,5 @@
-﻿using bLOG.Data.Services;
+﻿using System.Linq;
+using bLOG.Data.Services;
 using bLOG.Web.Framework.Results.ViewResults;
 
 namespace bLOG.Web.Framework.Handlers
@@ -18,14 +19,30 @@ namespace bLOG.Web.Framework.Handlers
       var view = View();
       view.UpdateToken("Id", post.Id);
       view.UpdateToken("Slug", post.Title.Replace(" ", "-"));
-      view.UpdateToken("Author", post.Author);
+      view.UpdateToken("Author", RenderAuthor(post.Author));
       view.UpdateToken("Title", post.Title);
       view.UpdateToken("Content", post.Content);
       view.UpdateToken("PublishDate", post.PublishDate.ToString("D"));
       view.UpdateToken("ViewsCount", post.ViewsCount.ToString());
-      view.UpdateToken("Keywords", post.Keywords ?? "");
+      view.UpdateToken("Keywords", RenderKeywords(post.Keywords));
 
       return view;
+    }
+
+    private string RenderKeywords(string keywords)
+    {
+      if (string.IsNullOrEmpty(keywords)) return "";
+
+      return string.Join(", ", keywords.Split(',').Select(k => string.Format(WebConfig.AnchorFormat, "/?t=" + k.Trim(), k.Trim())));
+    }
+    private string RenderAuthor(string author)
+    {
+      if (string.IsNullOrEmpty(author)) return author;
+
+      string url = WebConfig.AppSettings[string.Format(WebConfig.UserUrlFormat, author)];
+      if (string.IsNullOrEmpty(url)) return author;
+
+      return string.Format(WebConfig.AnchorFormat, url, author);
     }
   }
 }
