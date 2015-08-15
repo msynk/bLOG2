@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Contents\Css\Code.css" />
+    <Content Include="Contents\Css\font-awesome.min.css" />
     <Content Include="Contents\Css\normalize.css" />
     <Content Include="Contents\Css\prism.css" />
     <Content Include="Contents\Css\Site.css" />
@@ -72,11 +73,8 @@
     <Content Include="Views\Post\Index.html" />
     <Content Include="wlwmanifest.xml" />
     <Content Include="App_Data\bLOG.db" />
-    <Content Include="Contents\fonts\icons.woff" />
-    <Content Include="Contents\fonts\1.woff2" />
-    <Content Include="Contents\fonts\2.woff2" />
-    <Content Include="Contents\fonts\3.woff2" />
     <Content Include="Contents\fonts\icons.txt" />
+    <Content Include="Contents\fonts\fontawesome-webfont.txt" />
     <None Include="Properties\PublishProfiles\file.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

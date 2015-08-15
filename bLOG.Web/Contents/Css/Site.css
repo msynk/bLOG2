@@ -1245,3 +1245,38 @@ margin on the iframe, cause it breaks stuff. */
    End of file. Media queries should be the last thing here. Do not add stuff
    below this point, or it will probably fuck everything up.
    ========================================================================== */
+
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
+.container-1 {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  width: 300px;
+  white-space: nowrap;
+  background-color: #102030;
+}
+
+  .container-1 input#search {
+    width: 300px;
+    height: 50px;
+    background-color: #102030;
+    border: none;
+    font-size: 15px;
+    color: #aaa;
+    padding-left: 10px;
+    border-radius: 5px;
+  }
+
+
+
+  .container-1 .icon {
+    margin-left: 10px;
+    color: #aaa;
+  }

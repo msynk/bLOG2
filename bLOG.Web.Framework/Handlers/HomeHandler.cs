@@ -21,11 +21,12 @@ namespace bLOG.Web.Framework.Handlers
 
     private IQueryable<Post> ExpandQuery(IQueryable<Post> query)
     {
-      string s = QueryString("s");
-      string t = QueryString("t");
+      string s = QueryString("s"); // search
+      string t = QueryString("t"); // tag
       if (!string.IsNullOrEmpty(s))
       {
-        query = query.Where(p => p.Title.Contains(s));
+        s = s.ToLower();
+        query = query.Where(p => p.Title.ToLower().Contains(s) || p.Content.ToLower().Contains(s) || p.Keywords.ToLower().Contains(s));
       }
       if (!string.IsNullOrEmpty(t))
       {
@@ -132,7 +133,7 @@ namespace bLOG.Web.Framework.Handlers
     {
       if (string.IsNullOrEmpty(keywords)) return "";
       string anchorFormat = "<a href=/?t={0}>{0}</a>";
-      return string.Join(",", keywords.Split(',').Select(k => string.Format(anchorFormat, k)));
+      return string.Join(", ", keywords.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries).Select(k => string.Format(anchorFormat, k)));
     }
   }
 }
