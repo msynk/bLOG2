@@ -52,12 +52,37 @@ namespace bLOG.Web.Framework.Results.ViewResults
     private string RenderLayout(string result)
     {
       var layoutView = ViewContainer.LayoutView;
-      string pageTitle = _replacements.ContainsKey(WebConfig.PageTitleToken) ? _replacements[WebConfig.PageTitleToken].ToString() : "";
-      layoutView.UpdateToken(WebConfig.PageTitleToken, pageTitle);
+      foreach (var item in _replacements)
+      {
+        layoutView.UpdateToken(item.Key, item.Value);
+      }
+
       layoutView.UpdateToken(WebConfig.PageBodyToken, result);
       layoutView.UpdateToken(WebConfig.VersionToken, WebConfig.Version);
+      SetBlogLinks(layoutView);
 
       return layoutView.Render();
+    }
+
+    private void SetBlogLinks(IViewResult viewResult)
+    {
+      SetLinkTokens(WebConfig.UrlGithub, WebConfig.UrlGithubToken, WebConfig.DisplayGithubToken, viewResult);
+      SetLinkTokens(WebConfig.UrlLinkedin, WebConfig.UrlLinkedinToken, WebConfig.DisplayLinkedinToken, viewResult);
+      SetLinkTokens(WebConfig.UrlFacebook, WebConfig.UrlFacebookToken, WebConfig.DisplayFacebookToken, viewResult);
+      SetLinkTokens(WebConfig.UrlTwitter, WebConfig.UrlTwitterToken, WebConfig.DisplayTwitterToken, viewResult);
+      SetLinkTokens(WebConfig.UrlGoogle, WebConfig.UrlGoogleToken, WebConfig.DisplayGoogleToken, viewResult);
+    }
+    private void SetLinkTokens(string url, string urlToken, string displayToken, IViewResult viewResult)
+    {
+      if (!string.IsNullOrEmpty(url))
+      {
+        viewResult.UpdateToken(urlToken, url);
+        viewResult.UpdateToken(displayToken, "inline");
+      }
+      else
+      {
+        viewResult.UpdateToken(displayToken, "none");
+      }
     }
 
   }

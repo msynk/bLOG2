@@ -114,7 +114,7 @@ namespace bLOG.Web.Framework.Handlers
         postSummaryView.ResetTokens();
         postSummaryView.UpdateToken("Id", post.Id);
         postSummaryView.UpdateToken("Slug", post.Title.Replace(" ", "-"));
-        postSummaryView.UpdateToken("Author", post.Author);
+        postSummaryView.UpdateToken("Author", RenderAuthor(post.Author));
         postSummaryView.UpdateToken("Title", post.Title);
         var content = post.Content;
         var index = content.IndexOf("<summary>", StringComparison.Ordinal);
@@ -123,7 +123,7 @@ namespace bLOG.Web.Framework.Handlers
         postSummaryView.UpdateToken("Content", content.Substring(0, index) + "...");
         postSummaryView.UpdateToken("PublishDate", post.PublishDate.ToString("D"));
         postSummaryView.UpdateToken("ViewsCount", post.ViewsCount);
-        postSummaryView.UpdateToken("Keywords", RenderKeywords(post.Keywords ?? ""));
+        postSummaryView.UpdateToken("Keywords", RenderKeywords(post.Keywords));
         summaries += postSummaryView.Render();
       }
       return summaries;
@@ -132,8 +132,17 @@ namespace bLOG.Web.Framework.Handlers
     private string RenderKeywords(string keywords)
     {
       if (string.IsNullOrEmpty(keywords)) return "";
-      string anchorFormat = "<a href=/?t={0}>{0}</a>";
-      return string.Join(", ", keywords.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries).Select(k => string.Format(anchorFormat, k)));
+
+      return string.Join(", ", keywords.Split(',').Select(k => string.Format(WebConfig.AnchorFormat, "/?t=" + k.Trim(), k.Trim())));
+    }
+    private string RenderAuthor(string author)
+    {
+      if (string.IsNullOrEmpty(author)) return author;
+
+      string url = WebConfig.AppSettings[string.Format(WebConfig.UserUrlFormat, author)];
+      if (string.IsNullOrEmpty(url)) return author;
+
+      return string.Format(WebConfig.AnchorFormat, url, author);
     }
   }
 }

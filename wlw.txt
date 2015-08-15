@@ -1,7 +1,8 @@
 http://devnet.kentico.com/articles/windows-live-writer-integration
 
-windows live writer downloader plugin:
+windows live writer downloader plugin (this downloder is in _lib solution folder:   WLWDownloader.msi  ):
 http://codeclimber.net.nz/archive/2010/07/10/How-to-edit-very-old-posts-with-Windows-Live-Writer.aspx
+the url supported this way is like this:
 wlw://localhost:1234/?postid=1
 
 http://itproguru.com/expert/2013/09/adding-tags-dropdown-list-to-windows-live-writerstep-by-step/
