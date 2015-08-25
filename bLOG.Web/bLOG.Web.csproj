@@ -75,7 +75,6 @@
     <Content Include="App_Data\bLOG.db" />
     <Content Include="Contents\fonts\icons.txt" />
     <Content Include="Contents\fonts\fontawesome-webfont.txt" />
-    <None Include="Properties\PublishProfiles\file.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -86,7 +85,9 @@
   <ItemGroup>
     <Content Include="Views\Home\PostSummary.html" />
     <Content Include="Views\Layout.html" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\bLOG.Core\bLOG.Core.csproj">
@@ -109,6 +110,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

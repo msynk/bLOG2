@@ -2,11 +2,11 @@
 
 namespace bLOG.Web.Framework.Services
 {
-  public class SecurityService
-  {
-    public static bool Authenticate(string username, string password)
+    public class SecurityService
     {
-      return FormsAuthentication.Authenticate(username, password);
+        public static bool Authenticate(string username, string password)
+        {
+            return FormsAuthentication.Authenticate(username, password);
+        }
     }
-  }
 }

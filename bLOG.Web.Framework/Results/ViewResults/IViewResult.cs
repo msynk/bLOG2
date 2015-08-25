@@ -2,13 +2,13 @@
 
 namespace bLOG.Web.Framework.Results.ViewResults
 {
-  public interface IViewResult : IHttpResult
-  {
-    bool UseLayout { get; set; }
+    public interface IViewResult : IHttpResult
+    {
+        bool UseLayout { get; set; }
 
-    string Render();
+        string Render();
 
-    void ResetTokens();
-    void UpdateToken(string token, object value);
-  }
+        void ResetTokens();
+        void UpdateToken(string token, object value);
+    }
 }

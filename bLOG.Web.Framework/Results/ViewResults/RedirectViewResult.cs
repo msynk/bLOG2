@@ -2,19 +2,19 @@
 
 namespace bLOG.Web.Framework.Results.ViewResults
 {
-  public class RedirectViewResult : BasicViewResult
-  {
-    private readonly string _redirectUrl;
-
-    public RedirectViewResult(string redirectUrl) : base(redirectUrl)
+    public class RedirectViewResult : BasicViewResult
     {
-      _redirectUrl = redirectUrl;
-    }
+        private readonly string _redirectUrl;
 
-    public override string Render()
-    {
-      return "";
-    }
+        public RedirectViewResult(string redirectUrl) : base(redirectUrl)
+        {
+            _redirectUrl = redirectUrl;
+        }
 
-  }
+        public override string Render()
+        {
+            return "";
+        }
+
+    }
 }

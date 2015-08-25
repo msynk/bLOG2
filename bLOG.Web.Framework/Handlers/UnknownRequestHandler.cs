@@ -2,11 +2,11 @@
 
 namespace bLOG.Web.Framework.Handlers
 {
-  public class UnknownRequestHandler : BaseHandler
-  {
-    protected override IHttpResult ProcessRequestInternal()
+    public class UnknownRequestHandler : BaseHandler
     {
-      return null;
+        protected override IHttpResult ProcessRequestInternal()
+        {
+            return null;
+        }
     }
-  }
 }
