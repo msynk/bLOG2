@@ -59,6 +59,8 @@ namespace bLOG.Web.Framework.Results.ViewResults
 
             layoutView.UpdateToken(WebConfig.PageBodyToken, result);
             layoutView.UpdateToken(WebConfig.VersionToken, WebConfig.Version);
+            layoutView.UpdateToken(WebConfig.BlogTitle, WebConfig.BlogTitle);
+            layoutView.UpdateToken(WebConfig.Copyright, WebConfig.Copyright);
             SetBlogLinks(layoutView);
 
             return layoutView.Render();

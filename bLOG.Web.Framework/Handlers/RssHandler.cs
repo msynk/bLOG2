@@ -13,7 +13,7 @@ namespace bLOG.Web.Framework.Handlers
         protected override IHttpResult ProcessRequestInternal()
         {
             var allPosts = PostService.Instance.Query.OrderByDescending(p => p.PublishDate).ToList();
-            return new RssHttpResult("bLOG2 rss feed", Syndicate(allPosts));
+            return new RssHttpResult(WebConfig.BlogTitle + " rss feed", Syndicate(allPosts));
         }
 
         private List<SyndicationItem> Syndicate(IList<Post> posts)
