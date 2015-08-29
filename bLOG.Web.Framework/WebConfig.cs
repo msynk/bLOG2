@@ -6,7 +6,7 @@ namespace bLOG.Web.Framework
 {
     public static class WebConfig
     {
-        public static string Version = "0.11.6";
+        public static string Version = "0.11.7";
 
         public const string ViewsFolder = "Views";
         public const string ViewsExtention = "html";
@@ -28,6 +28,8 @@ namespace bLOG.Web.Framework
         public static string PageTitleToken = "PageTitle";
         public static string PageBodyToken = "PageBody";
         public static string VersionToken = "Version";
+        public static string BlogTitleToken = "BlogTitle";
+        public static string CopyrightToken = "Copyright";
 
         public static string UrlGithubToken = "UrlGithub";
         public static string UrlLinkedinToken = "UrlLinkedin";
