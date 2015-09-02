@@ -6,7 +6,7 @@ namespace bLOG.Web.Framework
 {
     public static class WebConfig
     {
-        public static string Version = "0.11.7";
+        public static string Version = "0.11.8";
 
         public const string ViewsFolder = "Views";
         public const string ViewsExtention = "html";
@@ -36,12 +36,14 @@ namespace bLOG.Web.Framework
         public static string UrlFacebookToken = "UrlFacebook";
         public static string UrlTwitterToken = "UrlTwitter";
         public static string UrlGoogleToken = "UrlGoogle";
+        public static string UrlInstagramToken = "UrlInstagram";
 
         public static string DisplayGithubToken = "DisplayGithub";
         public static string DisplayLinkedinToken = "DisplayLinkedin";
         public static string DisplayFacebookToken = "DisplayFacebook";
         public static string DisplayTwitterToken = "DisplayTwitter";
         public static string DisplayGoogleToken = "DisplayGoogle";
+        public static string DisplayInstagramToken = "DisplayInstagram";
 
 
         public static ViewPathProvider ViewPathProvider = ViewPathProvider.Default;
@@ -56,5 +58,6 @@ namespace bLOG.Web.Framework
         public static string UrlFacebook = AppSettings["Url.Facebook"];
         public static string UrlTwitter = AppSettings["Url.Twitter"];
         public static string UrlGoogle = AppSettings["Url.Google"];
+        public static string UrlInstagram = AppSettings["Url.Instagram"];
     }
 }

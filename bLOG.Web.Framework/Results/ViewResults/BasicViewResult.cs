@@ -73,6 +73,7 @@ namespace bLOG.Web.Framework.Results.ViewResults
             SetLinkTokens(WebConfig.UrlFacebook, WebConfig.UrlFacebookToken, WebConfig.DisplayFacebookToken, viewResult);
             SetLinkTokens(WebConfig.UrlTwitter, WebConfig.UrlTwitterToken, WebConfig.DisplayTwitterToken, viewResult);
             SetLinkTokens(WebConfig.UrlGoogle, WebConfig.UrlGoogleToken, WebConfig.DisplayGoogleToken, viewResult);
+            SetLinkTokens(WebConfig.UrlInstagram, WebConfig.UrlInstagramToken, WebConfig.DisplayInstagramToken, viewResult);
         }
         private void SetLinkTokens(string url, string urlToken, string displayToken, IViewResult viewResult)
         {
