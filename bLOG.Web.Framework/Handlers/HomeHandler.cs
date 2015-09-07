@@ -13,7 +13,7 @@ namespace bLOG.Web.Framework.Handlers
 
         public IViewResult Index()
         {
-            PageTitle = string.Format("{0} - Home", WebConfig.BlogTitle);
+            PageTitle = string.Format("{0} - Home", WebConfig.Settings.BlogTitle);
             IQueryable<Post> query = PostService.Instance.Query;
             query = ExpandQuery(query);
             return GenerateView(query);
@@ -38,7 +38,7 @@ namespace bLOG.Web.Framework.Handlers
         {
             IViewResult view = View();
             int pageNumber = GetPageNumber();
-            int pageSize = int.Parse(WebConfig.PageSize);
+            int pageSize = int.Parse(WebConfig.Settings.PageSize);
             int totalPages = GetTotalPages(query, pageSize);
             if (pageNumber > totalPages)
             {
@@ -133,16 +133,16 @@ namespace bLOG.Web.Framework.Handlers
         {
             if (string.IsNullOrEmpty(keywords)) return "";
 
-            return string.Join(", ", keywords.Split(',').Select(k => string.Format(WebConfig.AnchorFormat, "/?t=" + k.Trim(), k.Trim())));
+            return string.Join(", ", keywords.Split(',').Select(k => string.Format(Strings.AnchorFormat, "/?t=" + k.Trim(), k.Trim())));
         }
         private string RenderAuthor(string author)
         {
             if (string.IsNullOrEmpty(author)) return author;
 
-            string url = WebConfig.AppSettings[string.Format(WebConfig.UserUrlFormat, author)];
+            string url = WebConfig.AppSettings[string.Format(Strings.UserUrlFormat, author)];
             if (string.IsNullOrEmpty(url)) return author;
 
-            return string.Format(WebConfig.AnchorFormat, url, author);
+            return string.Format(Strings.AnchorFormat, url, author);
         }
     }
 }

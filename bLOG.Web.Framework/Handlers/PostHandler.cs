@@ -12,7 +12,7 @@ namespace bLOG.Web.Framework.Handlers
             var post = postService.Get(Id);
             if (post == null) return null;
 
-            PageTitle = string.Format("{0} - {1}", WebConfig.BlogTitle, post.Title);
+            PageTitle = string.Format("{0} - {1}", WebConfig.Settings.BlogTitle, post.Title);
             post.ViewsCount += 1;
             postService.Edit(post);
 
@@ -33,16 +33,16 @@ namespace bLOG.Web.Framework.Handlers
         {
             if (string.IsNullOrEmpty(keywords)) return "";
 
-            return string.Join(", ", keywords.Split(',').Select(k => string.Format(WebConfig.AnchorFormat, "/?t=" + k.Trim(), k.Trim())));
+            return string.Join(", ", keywords.Split(',').Select(k => string.Format(Strings.AnchorFormat, "/?t=" + k.Trim(), k.Trim())));
         }
         private string RenderAuthor(string author)
         {
             if (string.IsNullOrEmpty(author)) return author;
 
-            string url = WebConfig.AppSettings[string.Format(WebConfig.UserUrlFormat, author)];
+            string url = WebConfig.AppSettings[string.Format(Strings.UserUrlFormat, author)];
             if (string.IsNullOrEmpty(url)) return author;
 
-            return string.Format(WebConfig.AnchorFormat, url, author);
+            return string.Format(Strings.AnchorFormat, url, author);
         }
     }
 }

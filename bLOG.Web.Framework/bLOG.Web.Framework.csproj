@@ -70,6 +70,7 @@
     <Compile Include="Results\ViewResults\RedirectViewResult.cs" />
     <Compile Include="Results\ViewResults\ViewPathProvider.cs" />
     <Compile Include="Results\ViewResults\ViewContainer.cs" />
+    <Compile Include="Strings.cs" />
     <Compile Include="WebConfig.cs" />
   </ItemGroup>
   <ItemGroup>

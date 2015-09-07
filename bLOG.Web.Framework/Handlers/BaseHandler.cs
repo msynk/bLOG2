@@ -38,16 +38,16 @@ namespace bLOG.Web.Framework.Handlers
 
         protected virtual string PageTitle { get; set; }
         protected virtual string ViewsFolder { get { return Handler; } }
-        protected string Handler { get { return Route(WebConfig.HanlderRoute).ToString(); } }
-        protected string Action { get { return Route(WebConfig.ActionRoute).ToString(); } }
-        protected string Id { get { return Route(WebConfig.IdRoute).ToString(); } }
+        protected string Handler { get { return Route(Strings.HanlderRoute).ToString(); } }
+        protected string Action { get { return Route(Strings.ActionRoute).ToString(); } }
+        protected string Id { get { return Route(Strings.IdRoute).ToString(); } }
 
         protected virtual IHttpResult FinalizeView(IHttpResult result)
         {
             IViewResult viewResult = result as IViewResult;
             if (viewResult != null)
             {
-                viewResult.UpdateToken(WebConfig.PageTitleToken, PageTitle);
+                viewResult.UpdateToken(Strings.PageTitleToken, PageTitle);
             }
             return result;
         }

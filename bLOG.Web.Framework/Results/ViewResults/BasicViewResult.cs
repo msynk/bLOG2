@@ -26,7 +26,7 @@ namespace bLOG.Web.Framework.Results.ViewResults
         {
             var result = _replacements.Aggregate(ViewContainer.GetContent(_virtualPath),
               (current, replacement) =>
-                current.Replace(string.Format(WebConfig.ViewTokenFormat, replacement.Key), replacement.Value.ToString()));
+                current.Replace(string.Format(Strings.ViewTokenFormat, replacement.Key), replacement.Value.ToString()));
 
             return UseLayout ? RenderLayout(result) : result;
         }
@@ -57,10 +57,10 @@ namespace bLOG.Web.Framework.Results.ViewResults
                 layoutView.UpdateToken(item.Key, item.Value);
             }
 
-            layoutView.UpdateToken(WebConfig.PageBodyToken, result);
-            layoutView.UpdateToken(WebConfig.VersionToken, WebConfig.Version);
-            layoutView.UpdateToken(WebConfig.BlogTitleToken, WebConfig.BlogTitle);
-            layoutView.UpdateToken(WebConfig.CopyrightToken, WebConfig.Copyright);
+            layoutView.UpdateToken(Strings.PageBodyToken, result);
+            layoutView.UpdateToken(Strings.VersionToken, WebConfig.Version);
+            layoutView.UpdateToken(Strings.BlogTitleToken, WebConfig.Settings.BlogTitle);
+            layoutView.UpdateToken(Strings.CopyrightToken, WebConfig.Settings.Copyright);
             SetBlogLinks(layoutView);
 
             return layoutView.Render();
@@ -68,12 +68,12 @@ namespace bLOG.Web.Framework.Results.ViewResults
 
         private void SetBlogLinks(IViewResult viewResult)
         {
-            SetLinkTokens(WebConfig.UrlGithub, WebConfig.UrlGithubToken, WebConfig.DisplayGithubToken, viewResult);
-            SetLinkTokens(WebConfig.UrlLinkedin, WebConfig.UrlLinkedinToken, WebConfig.DisplayLinkedinToken, viewResult);
-            SetLinkTokens(WebConfig.UrlFacebook, WebConfig.UrlFacebookToken, WebConfig.DisplayFacebookToken, viewResult);
-            SetLinkTokens(WebConfig.UrlTwitter, WebConfig.UrlTwitterToken, WebConfig.DisplayTwitterToken, viewResult);
-            SetLinkTokens(WebConfig.UrlGoogle, WebConfig.UrlGoogleToken, WebConfig.DisplayGoogleToken, viewResult);
-            SetLinkTokens(WebConfig.UrlInstagram, WebConfig.UrlInstagramToken, WebConfig.DisplayInstagramToken, viewResult);
+            SetLinkTokens(WebConfig.Settings.UrlGithub,    Strings.UrlGithubToken,    Strings.DisplayGithubToken, viewResult);
+            SetLinkTokens(WebConfig.Settings.UrlLinkedin,  Strings.UrlLinkedinToken,  Strings.DisplayLinkedinToken, viewResult);
+            SetLinkTokens(WebConfig.Settings.UrlFacebook,  Strings.UrlFacebookToken,  Strings.DisplayFacebookToken, viewResult);
+            SetLinkTokens(WebConfig.Settings.UrlTwitter,   Strings.UrlTwitterToken,   Strings.DisplayTwitterToken, viewResult);
+            SetLinkTokens(WebConfig.Settings.UrlGoogle,    Strings.UrlGoogleToken,    Strings.DisplayGoogleToken, viewResult);
+            SetLinkTokens(WebConfig.Settings.UrlInstagram, Strings.UrlInstagramToken, Strings.DisplayInstagramToken, viewResult);
         }
         private void SetLinkTokens(string url, string urlToken, string displayToken, IViewResult viewResult)
         {

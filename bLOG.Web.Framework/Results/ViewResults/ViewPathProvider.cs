@@ -12,10 +12,10 @@ namespace bLOG.Web.Framework.Results.ViewResults
 
         public string ViewsExtension { get; private set; }
 
-        public ViewPathProvider(string viewsFolder = WebConfig.ViewsFolder,
-                                string viewsExtention = WebConfig.ViewsExtention,
-                                string layoutFileName = WebConfig.LayoutViewName,
-                                string notFoundFileName = WebConfig.NotFoundViewName)
+        public ViewPathProvider(string viewsFolder = Strings.ViewsFolder,
+                                string viewsExtention = Strings.ViewsExtention,
+                                string layoutFileName = Strings.LayoutViewName,
+                                string notFoundFileName = Strings.NotFoundViewName)
         {
             ViewsFolder = viewsFolder;
             ViewsExtension = viewsExtention;
